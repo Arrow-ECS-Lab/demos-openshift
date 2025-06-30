@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/Arrow-ECS-Lab/demos-openshift.git'
     targetRevision: HEAD
-    path: minecraft-server/
+    path: /minecraft-server/
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: demo-minecraft
