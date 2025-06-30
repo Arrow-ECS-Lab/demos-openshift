@@ -4,3 +4,11 @@ metadata:
   name: minecraft-service
   annotations:
     metallb.universe.tf/address-pool: ip-addresspool-isf
+spec:
+  selector:
+    app: minecraft
+  ports:
+    - protocol: TCP
+      port: 25565
+      targetPort: 25565
+  type: LoadBalancer
