@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minecraft
+  template:
+    metadata:
+      labels:
+        app: minecraft
+    spec:
+      containers:
+        - name: minecraft
+          image: quay.io/thomas_marko/minecraft:java-1.21.6-20250630-01
+          ports:
+            - containerPort: 25565
+          env:
+            - name: MCRAM
+              value: "2G"
+            - name: MC_WORLD
+              value: "world"
+            - name: MC_UNIVERSE
+              value: "universe"
+            - name: MC_SERVER_ID
+              value: "Minecraft 1.21.6 Server"
+          volumeMounts:
+            - name: cache
+              mountPath: /app/minecraft/cache
+            - name: config
+              mountPath: /app/minecraft/config
+            - name: logs
+              mountPath: /app/minecraft/logs
+            - name: universe
+              mountPath: /app/minecraft/universe
+      volumes:
+        - name: cache
+          persistentVolumeClaim:
+            claimName: minecraft-cache
+        - name: config
+          persistentVolumeClaim:
+            claimName: minecraft-config
+        - name: logs
+          persistentVolumeClaim:
+            claimName: minecraft-logs
+        - name: universe
+          persistentVolumeClaim:
+            claimName: minecraft-universe
