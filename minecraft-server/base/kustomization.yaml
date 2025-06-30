@@ -1,5 +1,5 @@
 resources:
+  - rolebinding.yaml
   - deployment.yaml
   - service.yaml
   - pvcs.yaml
-
